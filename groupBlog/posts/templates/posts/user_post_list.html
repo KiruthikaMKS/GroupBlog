@@ -1,0 +1,10 @@
+{% extends 'posts/post_base.html' %}
+{% block prepost %}
+<h2>posts by...</h2>
+<h1>{{post_user.username}}</h1>
+{% for post in post_list %}
+  {% include 'posts/_post.html' %}
+{% empty %}
+<h2>No Posts yet..</h2>
+{% endfor %}
+{% endblock %}

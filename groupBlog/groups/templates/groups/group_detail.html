@@ -1,0 +1,21 @@
+{% extends 'groups/group_base.html'%}
+{% block group_content %}
+  <h1>{{group.name}}</h1>
+  {% if user.is_authenticated %}
+  <h3> <a href="{% url 'posts:for_user' username=user.username %}">@{{user.username}}</a> </h3>
+  {% endif %}
+  {% if user in group.members.all %}
+  <a href="{% url 'groups:leave' slug=group.slug %}" class="btn btn-warning">Leave</a>
+  {% else %}
+  <a href="{% url 'groups:join' slug=group.slug %}" class="btn btn-warning">Join</a>
+  {% endif %}
+
+  Members:{{group.members.count}}
+
+  <h1>my Posts @{{group.name}}</h1>
+  <div class="jumbotron">
+    {% for post in group.posts_group.all %}
+      {% include 'posts/_post.html' %}
+    {% endfor %}
+  </div>
+{% endblock %}

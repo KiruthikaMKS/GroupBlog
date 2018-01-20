@@ -1,0 +1,37 @@
+{% extends 'groups/group_base.html' %}
+{% block pregroup %}
+{% if user.is_authenticated %}
+  <h1>Welcome back..!!!
+    <a href="{% url 'posts:for_user' username=user.username %}">@{{user.username}}</a></h1>
+{% endif %}
+<h2>Groups</h2>
+<h3>Lets share something ...!!!</h3>
+{% if user.is_authenticated %}
+<a href="{% url 'groups:create' %}" class="btn btn-warning">Create New Group</a>
+{% endif %}
+
+
+
+{% for gp in group_list %}
+   <div class="container">
+     <div class="jumbotron">
+       <h1><a href="{% url 'groups:single' slug=gp.slug %}">{{gp.name}}</a></h1>
+       <h3>{{gp.description}}</h3>
+       <div class="row">
+         <div class="col-md-2">
+           <button type="button" class="btn btn-secondary">
+             <span class="badge badge-light">{{gp.members.count}}</span>
+              member{{gp.members.count|pluralize}}
+            </button>
+         </div>
+         <div class="col-md-2">
+           <button type="button" class="btn btn-secondary">
+             <span class="badge badge-light">{{gp.posts_group.count}}</span>
+              post{{gp.posts_group.count|pluralize}}
+            </button>
+         </div>
+       </div>
+     </div>
+  </div>
+{% endfor %}
+{% endblock %}

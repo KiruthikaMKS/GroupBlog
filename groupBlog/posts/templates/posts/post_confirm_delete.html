@@ -1,0 +1,10 @@
+{% extends 'posts/post_base.html'%}
+{% block prepost %}
+<h1>Wanna delete me..??</h1>
+{% include 'posts/_post.html' with post=object hide_delete=True %}
+<form  method="post">
+  {% csrf_token %}
+  <input type="submit" name="" value="Delete" class="btn btn-danger">
+  <a href="{% url 'posts:all' %}" class="btn btn-primary">Cancel</a>
+</form>
+{% endblock%}

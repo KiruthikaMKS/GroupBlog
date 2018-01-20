@@ -1,0 +1,10 @@
+<div class="container">
+  <div class="jumbotron">
+    <h2>{{post.message}}</h2>
+      <a href="{% url 'posts:for_user' username=post.user.username%}"><h1>{{post.user.username}}</h1></a>
+    <h2> <a href="{% url 'posts:single' username=post.user.username pk=post.pk %}">{{post.created_at}}</a> </h2>
+    {% if user.is_authenticated and post.user == user and not hide_delete %}
+    <h4> <a href="{% url 'posts:delete' pk=post.pk %}" title="delete">Delete</a> </h4>
+    {% endif %}
+  </div>
+</div>

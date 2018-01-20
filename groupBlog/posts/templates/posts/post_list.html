@@ -1,0 +1,17 @@
+{% extends 'posts/post_base.html' %}
+{% block prepost %}
+<h2>Your Groups</h2>
+{% for gp in user_groups %}
+  <h3> <a href="{% url 'groups:single' slug=gp.slug %}">{{gp.slug}}</a> </h3>
+{% endfor %}
+<h2>All Groups</h2>
+{% for gp in all_groups %}
+  <h3> <a href="{% url 'groups:single' slug=gp.slug %}">{{gp.slug}}</a> </h3>
+{% endfor %}
+
+<div class="jumbotron">
+  {% for post in post_list %}
+    {% include 'posts/_post.html' %}
+  {% endfor %}
+</div>
+{% endblock%}
